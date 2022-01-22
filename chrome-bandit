@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+require 'uri'
+require_relative "credentials_extractor"
+
+def main
+    url = ARGV[0]
+    usage = "Usage:\n  chrome-bandit <https-url>\n  chrome-bandit --help\n"
+
+    if url == nil || url == "--help"
+        puts usage
+        return
+    end
+
+    uri = URI.parse(url)
+
+    if uri.scheme != "https"
+        puts "error: uri scheme must be https"
+        return
+    end
+
+    puts "[+] extracting credentials from #{url}..."
+
+    credentials = extract_credentials(url)
+
+    puts "[+] #{credentials.length} credentials found"
+    puts credentials
+end
+
+main
