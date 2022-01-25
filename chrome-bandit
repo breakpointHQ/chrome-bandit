@@ -1,29 +1,46 @@
 #!/usr/bin/env ruby
+
 require 'uri'
+require 'optparse'
 require_relative "credentials_extractor"
 
-def main
-    url = ARGV[0]
-    usage = "Usage:\n  chrome-bandit <https-url>\n  chrome-bandit --help\n"
+urls = []
+verbose = false
+siteTimeout = 3
+moveCookies = false
+outputFormat = "text"
 
-    if url == nil || url == "--help"
-        puts usage
-        return
-    end
-
+OptionParser.new do |opts|
+  opts.banner = "Usage: chrome-bandit [options]"
+  opts.on("-u", "--url=<url>", "the url to extract the password from") do |url|
     uri = URI.parse(url)
-
     if uri.scheme != "https"
-        puts "error: uri scheme must be https"
-        return
+        raise "error: scheme must be \"https\" got \"#{uri.scheme}\" for \"#{url}\""
     end
+    urls.push(url)
+  end
+  opts.on("-v", "--verbose", "print debug messages") do
+    verbose = true
+  end
+  opts.on("-f", "--format=<type>", "output format (text, json)") do |newOutputForamt|
+    if newOutputForamt != "text" && newOutputForamt != "json"
+        raise "error: foramt must be \"text\" or \"json\""
+    end
+    outputFormat = newOutputForamt
+  end
+  opts.on("-t", "--timeout=<number>", "the timeout in seconds per site") do |timeout|
+    siteTimeout = timeout.to_i
+    if siteTimeout < 1
+      raise "error: timeout must be at least 1"
+    end
+  end
+  opts.on("-m", "--move-cookies", "temporarily remove the Chrome \"Cookies\" file to force the user to logout") do |yes|
+    moveCookies = true
+  end
+end.parse!
 
-    puts "[+] extracting credentials from #{url}..."
-
-    credentials = extract_credentials(url)
-
-    puts "[+] #{credentials.length} credentials found"
-    puts credentials
+if urls.length == 0
+    raise "--url is required"
 end
 
-main
+main(urls, siteTimeout, moveCookies, outputFormat, verbose)

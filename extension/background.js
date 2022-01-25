@@ -1,14 +1,19 @@
-const tabId = 2;
+const tabs = new Map();
 
-// Simulate a mouse click so chrome will make
-// the credentials accessible to the DOM.
-chrome.debugger.attach({ tabId }, "1.2", function () {
-    const commandParams = { type: "mousePressed", x: 1, y: 1, button: "left" };
+chrome.tabs.onUpdated.addListener(function (tabId) {
+    chrome.debugger.attach({ tabId }, "1.2", function () {
+        const commandParams = { type: "mousePressed", x: 1, y: 1, button: "left" };
+        const timer = setInterval(function () {
+            chrome.debugger.sendCommand({ tabId }, "Input.dispatchMouseEvent", commandParams);
+            chrome.debugger.sendCommand({ tabId }, "Input.dispatchMouseEvent", commandParams);
+        }, 100);
+        tabs.set(tabId, timer);
+    });
+});
 
-    setInterval(function () {
-        chrome.debugger.sendCommand({ tabId }, "Input.dispatchMouseEvent", commandParams);
-        chrome.debugger.sendCommand({ tabId }, "Input.dispatchMouseEvent", commandParams);
-    }, 250);
-
-    chrome.tabs.executeScript(tabId, { file: "content-script.js" });
+chrome.tabs.onRemoved.addListener(function (tabId) {
+    if (tabs.get(tabId)) {
+        clearInterval(tabs.get(tabId));
+        tabs.delete(tabId);
+    }
 });

