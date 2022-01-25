@@ -2,7 +2,7 @@
 
 require 'uri'
 require 'optparse'
-require_relative "credentials_extractor"
+require_relative 'credentials_extractor'
 
 urls = []
 verbose = false
