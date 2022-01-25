@@ -79,7 +79,7 @@ def main(urls, siteTimeout, moveCookies, outputFormat, verbose)
         _close_chrome
 
         if moveCookies == true
-            log "move the \"Cookies\" file back", verbose
+            log "[+] move the \"Cookies\" file back", verbose
             `mv /tmp/Cookies "#{Dir.home}/Library/Application Support/Google/Chrome/Default/Cookies"`
         end
 
