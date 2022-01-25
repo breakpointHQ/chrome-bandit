@@ -11,9 +11,6 @@ end
 def _open_chrome_with_extension(trustedUrl)
     pid = nil
     reader, writer = IO.pipe
-
-    _close_chrome
-    
     cmd = "\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --load-extension=#{Dir.getwd}/extension #{trustedUrl} --window-size=200,200  > /dev/null"
     pid = Process.spawn(cmd, [:out, :err] => writer)
     Process.detach(pid)
