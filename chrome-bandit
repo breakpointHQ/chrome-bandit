@@ -24,7 +24,7 @@ OptionParser.new do |opts|
   end
   opts.on("-f", "--format=<type>", "output format (text, json)") do |newOutputForamt|
     if newOutputForamt != "text" && newOutputForamt != "json"
-        raise "error: foramt must be \"text\" or \"json\""
+        raise "error: format must be \"text\" or \"json\""
     end
     outputFormat = newOutputForamt
   end
