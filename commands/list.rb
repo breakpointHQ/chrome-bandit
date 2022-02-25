@@ -13,9 +13,9 @@ class ListCommand
 
         parser = OptionParser.new do |opts|
             opts.banner = 'Usage: chrome-bandit list [options]'
-            opts.on('-u', '--url <url>', String, 'only show passwords that match <url>')
+            opts.on('-u', '--url <url>', String, 'only show passwords where the origin url match <url>')
             opts.on('-f', '--format <format>', String, 'set the output format: text, json')
-            opts.on('-l', '--login_data <path>', String, 'set the Login Data file to <path>')
+            opts.on('-l', '--login_data <path>', String, 'set the "Login Data" file path')
 
             for browser in BROWSERS.keys
                 opts.on('--' + browser.to_s)

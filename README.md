@@ -28,9 +28,9 @@ chrome-bandit <command> -help          quick help on <command>
 
 ```sh
 Usage: chrome-bandit list [options]
-    -u, --url <url>                  only show passwords that match <url>
+    -u, --url <url>                  only show passwords where the origin url match <url>
     -f, --format <format>            set the output format: text, json
-    -l, --login_data <path>          set the Login Data file to <path>
+    -l, --login_data <path>          set the "Login Data" file path
         --chrome
         --opera
         --edge
@@ -60,15 +60,15 @@ chrome-bandit list --chrome --url github
 
 ```sh
 Usage: chrome-bandit decrypt [options]
-    -x, --port <port>                set server HTTP port
+    -x, --port <port>                set HTTP server port
     -f, --format <format>            set the output format: text, json
-    -l, --login_data <path>          set the "Login Data" file path to <path>
-    -b <name>,                       set the browser process name to <name>
+    -l, --login_data <path>          set the "Login Data" file path
+    -b <name>,                       set the browser process name
         --browser_process_name
-    -p <path>,                       set the browser executable path to <path>
+    -p <path>,                       set the browser executable path
         --browser_executable_path
-    -i, --id <id>                    decrypt the password for site <id>
-    -u, --url <url>                  decrypt the password for the first match for <url>
+    -i, --id <id>                    decrypt the password for a given site id
+    -u, --url <url>                  decrypt the password for the first match of a given url
         --chrome
         --opera
         --edge
