@@ -1,7 +1,11 @@
 # Chrome Bandit
 
 Programmatically extract saved passwords from Chromium based browsers.
-Currently Chrome Bandit supports Google Chrome, Microsoft Edge, and Opera for macOS.
+Currently Bandit supports Google Chrome, Microsoft Edge, and Opera on macOS.
+
+<center>
+    <img src="./resources/images/logo.svg" width="128" />
+</center>
 
 ## Usage
 
@@ -57,3 +61,5 @@ On macOS, Chrome is storing the credentials in “Login Data” in the Chrome us
 
 ## Legal Disclaimer
 Usage of this code for attacking targets without prior mutual consent is illegal. It's the end user's responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program. Only use for educational purposes.
+
+<img style="margin-top:100px" src="./resources/images/cactus.svg" width="128" />
