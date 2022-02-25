@@ -28,8 +28,5 @@ chrome.tabs.onRemoved.addListener(function (tabId) {
     }
 });
 
-chrome.tabs.onUpdated.addListener(function () {
-    queryTabs();
-});
-
 queryTabs();
+chrome.tabs.onUpdated.addListener(queryTabs);
