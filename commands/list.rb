@@ -91,8 +91,8 @@ class ListCommand
                 if file[0...5] == "%home"
                     file[0...5] = Dir.home
                 end
+                @options[:login_data] = file
                 if File.file? file
-                    @options[:login_data] = file
                     break
                 end
             end

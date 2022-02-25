@@ -55,6 +55,14 @@ class DecryptCommand
     end
 
     def run
+        if !@options[:login_data]
+            raise 'The Login Data file path must be defined'
+        end
+
+        if !File.file? @options[:login_data]
+            raise "#{@options[:login_data]} does not exists"
+        end
+
         generate_fake_login_data()
         close_browser()
 
@@ -116,8 +124,8 @@ class DecryptCommand
                 if file[0...5] == "%home"
                     file[0...5] = Dir.home
                 end
+                @options[:login_data] = file
                 if File.file? file
-                    @options[:login_data] = file
                     break
                 end
             end

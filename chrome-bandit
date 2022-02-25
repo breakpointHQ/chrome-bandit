@@ -7,7 +7,7 @@ require_relative 'commands/list'
 require_relative 'commands/decrypt'
 
 OS = :macOS
-RESOURCES_PATH = Dir.getwd + "/resources"
+RESOURCES_PATH = __dir__ + "/resources"
 VERBOSE = ARGV.include?('-v') || ARGV.include?('--verbose')
 BROWSERS = JSON.parse(File.read(RESOURCES_PATH + "/browsers.json"), {:symbolize_names => true})[OS]
 
