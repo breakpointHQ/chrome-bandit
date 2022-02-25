@@ -1,21 +1,21 @@
 def rprint(rows, space = 10)
     str = ""
-    maxCellSize = 0
+    max_cell_size = 0
 
     for row in rows
         for cell in row
             cell = cell.to_s
-            maxCellSize = [maxCellSize, cell.length].max
+            max_cell_size = [max_cell_size, cell.length].max
         end
     end
     
-    maxCellSize = maxCellSize + space
+    max_cell_size = max_cell_size + space
 
     for row in rows
         str = ""
         for cell in row
             cell = cell.to_s
-            n = maxCellSize-cell.length
+            n = max_cell_size-cell.length
             suffix = " " * n
             str += cell + suffix
         end
