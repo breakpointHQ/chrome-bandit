@@ -3,13 +3,13 @@
 Programmatically extract saved passwords from Chromium based browsers.
 Currently Bandit supports Google Chrome, Microsoft Edge, and Opera on macOS.
 
-<center>
-    <img src="./resources/images/logo.svg" width="128" />
-</center>
+<p align="center">
+    <img src="./resources/images/logo.svg" width="200" />
+</p>
 
 ## Usage
 
-```
+```sh
 chrome-bandit <command>
 
 Useage:
@@ -19,9 +19,9 @@ chrome-bandit decrypt                  decrypt a given password
 chrome-bandit <command> -help          quick help on <command>
 ```
 
-### List
+### List passwords
 
-```
+```sh
 Usage: chrome-bandit list [options]
     -u, --url <url>                  only show passwords that match <url>
     -f, --format <format>            set the output format: text, json
@@ -32,9 +32,28 @@ Usage: chrome-bandit list [options]
     -v, --verbose
 ```
 
-### Decrypt
-
+```sh
+chrome-bandit list --opera
++----------+----------------------------+--------------------+
+| ID       | URL                        | Username           |
++----------+----------------------------+--------------------+
+| 1        | https://paypal.com/        | example@gmail.com  |
+| 2        | https://github.com/session | masasron           |
++----------+----------------------------+--------------------+
 ```
+
+```sh
+chrome-bandit list --chrome --url github
++----------+----------------------------+--------------------+
+| ID       | URL                        | Username           |
++----------+----------------------------+--------------------+
+| 235      | https://github.com/session | masasron           |
++----------+----------------------------+--------------------+
+```
+
+### Decrypt a password
+
+```sh
 Usage: chrome-bandit decrypt [options]
     -x, --port <port>                set server HTTP port
     -f, --format <format>            set the output format: text, json
@@ -51,6 +70,15 @@ Usage: chrome-bandit decrypt [options]
     -v, --verbose
 ```
 
+```sh
+chrome-bandit decrypt --chrome --url paypal
++-------------------------+---------------------------+-----------------+
+| URL                     | Username                  | Password        |
++-------------------------+---------------------------+-----------------+
+| https://www.paypal.com/ | example@gmail.com         | qwerty          |
++-------------------------+---------------------------+-----------------+
+```
+
 ## Background
 
 The way passwords are stored on Windows and macOS is different.
@@ -62,4 +90,4 @@ On macOS, Chrome is storing the credentials in “Login Data” in the Chrome us
 ## Legal Disclaimer
 Usage of this code for attacking targets without prior mutual consent is illegal. It's the end user's responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program. Only use for educational purposes.
 
-<img style="margin-top:100px" src="./resources/images/cactus.svg" width="128" />
+<img src="./resources/images/cactus.svg" width="128" />
