@@ -17,13 +17,13 @@ class DecryptCommand
 
         parser = OptionParser.new do |opts|
             opts.banner = 'Usage: chrome-bandit decrypt [options]'
-            opts.on('-x', '--port <port>', Integer, 'set server HTTP port')
+            opts.on('-x', '--port <port>', Integer, 'set HTTP server port')
             opts.on('-f', '--format <format>', String, 'set the output format: text, json')
-            opts.on('-l', '--login_data <path>', String, 'set the "Login Data" file path to <path>')
-            opts.on('-b', '--browser_process_name <name>', String, 'set the browser process name to <name>')
-            opts.on('-p', '--browser_executable_path <path>', String, 'set the browser executable path to <path>')
-            opts.on('-i', '--id <id>', Integer, 'decrypt the password for site <id>')
-            opts.on('-u', '--url <url>', String, 'decrypt the password for the first match for <url>')
+            opts.on('-l', '--login_data <path>', String, 'set the "Login Data" file path')
+            opts.on('-b', '--browser_process_name <name>', String, 'set the browser process name')
+            opts.on('-p', '--browser_executable_path <path>', String, 'set the browser executable path')
+            opts.on('-i', '--id <id>', Integer, 'decrypt the password for a given site id')
+            opts.on('-u', '--url <url>', String, 'decrypt the password for the first match of a given url')
 
             for browser in BROWSERS.keys
                 opts.on('--' + browser.to_s)
@@ -44,7 +44,7 @@ class DecryptCommand
         end
 
         if @options[:id] == nil && @options[:url] == nil
-            raise '-i <id> or -u <url> options are required'
+            raise '-i <id> or -u <url> option is required'
         end
 
         if VERBOSE
