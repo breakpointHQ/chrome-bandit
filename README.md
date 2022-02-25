@@ -1,29 +1,50 @@
 # Chrome Bandit
 
-This is a proof of concept to show how your saved passwords on Google Chrome and other Chromium-based browsers can easily be stolen by any malicious program on macOS.
+Programmatically extract saved passwords from Chromium based browsers.
+Currently Chrome Bandit supports Google Chrome, Microsoft Edge, and Opera for macOS.
 
 ## Usage
 
 ```
-Usage: chrome-bandit [options]
-    -u, --url=<url>                  the url to extract the password from
-    -v, --verbose                    print debug messages
-    -f, --format=<type>              output format (text, json)
-    -t, --timeout=<number>           the timeout in seconds per site
-    -m, --move-cookies               temporarily remove the Chrome "Cookies" file to force the user to logout
+chrome-bandit <command>
+
+Useage:
+
+chrome-bandit list                     list browser passwords                 
+chrome-bandit decrypt                  decrypt a given password               
+chrome-bandit <command> -help          quick help on <command>
 ```
 
-Example:
+### List
+
 ```
-./chrome-bandit --url=https://github.com/login --url=https://example.com/ --move-cookies --format=json
+Usage: chrome-bandit list [options]
+    -u, --url <url>                  only show passwords that match <url>
+    -f, --format <format>            set the output format: text, json
+    -l, --login_data <path>          set the Login Data file to <path>
+        --chrome
+        --opera
+        --edge
+    -v, --verbose
 ```
 
-Output:
-```json
-[
-    {"origin":"https://github.com","credentials":["masasron","sec3etpassw0rd"]},
-    {"origin":"https://example.com","credentials":["ronmasas","123456"]}
-]
+### Decrypt
+
+```
+Usage: chrome-bandit decrypt [options]
+    -x, --port <port>                set server HTTP port
+    -f, --format <format>            set the output format: text, json
+    -l, --login_data <path>          set the "Login Data" file path to <path>
+    -b <name>,                       set the browser process name to <name>
+        --browser_process_name
+    -p <path>,                       set the browser executable path to <path>
+        --browser_executable_path
+    -i, --id <id>                    decrypt the password for site <id>
+    -u, --url <url>                  decrypt the password for the first match for <url>
+        --chrome
+        --opera
+        --edge
+    -v, --verbose
 ```
 
 ## Background

@@ -1,0 +1,27 @@
+{
+    "macOS": {
+        "chrome": {
+            "browser_process_name": "Google Chrome",
+            "browser_executable_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+            "login_data_files": [
+                "%home/Library/Application Support/Google/Chrome/Default/Login Data For Account",
+                "%home/Library/Application Support/com.operasoftware.Opera/Login Data"
+            ]
+        },
+        "opera": {
+            "browser_process_name": "Opera",
+            "browser_executable_path": "/Applications/Opera.app/Contents/MacOS/Opera",
+            "login_data_files": [
+                "%home/Library/Application Support/com.operasoftware.Opera/Login Data",
+                "%home/Library/Application Support/com.operasoftware.Opera/Login Data For Account"
+            ]
+        },
+        "edge": {
+            "browser_process_name": "Microsoft Edge",
+            "browser_executable_path": "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
+            "login_data_files": [
+                "%home/Library/Application Support/Microsoft Edge/Default/Login Data"
+            ]
+        }
+    }
+}
