@@ -86,6 +86,8 @@ chrome-bandit decrypt --chrome --url paypal
 
 ## Background
 
+This project started as a proof of concept to demonstrate how saved passwords on Google Chrome and other Chromium-based browsers can easily be stolen by malicious macOS programs. I've decided to turn it into a more robust tool for red teams targeting macOS.
+
 The way passwords are stored on Windows and macOS is different.
 
 On Windows, Chrome uses the Data Protection API (DPAPI) to bind your passwords to your user account and store them on disk encrypted with a key only **accessible to processes running as the same logged on user.**
