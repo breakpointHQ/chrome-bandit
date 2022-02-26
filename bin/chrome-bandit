@@ -1,13 +1,13 @@
 #!/usr/bin/env ruby
 require 'json'
-require_relative 'utils/rprint'
-require_relative 'utils/colorize'
-require_relative 'utils/tableprint'
-require_relative 'commands/list'
-require_relative 'commands/decrypt'
+require_relative '../utils/rprint'
+require_relative '../utils/colorize'
+require_relative '../utils/tableprint'
+require_relative '../commands/list'
+require_relative '../commands/decrypt'
 
 OS = :macOS
-RESOURCES_PATH = __dir__ + "/resources"
+RESOURCES_PATH = File.expand_path __dir__ + "/../resources"
 VERBOSE = ARGV.include?('-v') || ARGV.include?('--verbose')
 BROWSERS = JSON.parse(File.read(RESOURCES_PATH + "/browsers.json"), {:symbolize_names => true})[OS]
 
