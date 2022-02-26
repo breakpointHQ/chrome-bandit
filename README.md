@@ -12,6 +12,11 @@ Programmatically extract saved passwords from Chromium based browsers.
 | --------- | --------- | --------- |
 | macOS only | macOS only | macOS only
 
+## Quick start
+```
+brew install breakpointhq/chrome-bandit/chrome-bandit
+```
+
 ## Usage
 
 ```sh
