@@ -1,46 +1,45 @@
 #!/usr/bin/env ruby
+require 'json'
+require_relative 'utils/rprint'
+require_relative 'utils/colorize'
+require_relative 'utils/tableprint'
+require_relative 'commands/list'
+require_relative 'commands/decrypt'
 
-require 'uri'
-require 'optparse'
-require_relative 'credentials_extractor'
+OS = :macOS
+RESOURCES_PATH = __dir__ + "/resources"
+VERBOSE = ARGV.include?('-v') || ARGV.include?('--verbose')
+BROWSERS = JSON.parse(File.read(RESOURCES_PATH + "/browsers.json"), {:symbolize_names => true})[OS]
 
-urls = []
-verbose = false
-siteTimeout = 3
-moveCookies = false
-outputFormat = "text"
-
-OptionParser.new do |opts|
-  opts.banner = "Usage: chrome-bandit [options]"
-  opts.on("-u", "--url=<url>", "the url to extract the password from") do |url|
-    uri = URI.parse(url)
-    if uri.scheme != "https"
-        raise "error: scheme must be \"https\" got \"#{uri.scheme}\" for \"#{url}\""
+def main
+    case ARGV[0]
+        when 'list'
+            list = ListCommand.new
+            list.run()
+        when 'decrypt'
+            list = DecryptCommand.new
+            list.run()
+        else
+            help()
     end
-    urls.push(url)
-  end
-  opts.on("-v", "--verbose", "print debug messages") do
-    verbose = true
-  end
-  opts.on("-f", "--format=<type>", "output format (text, json)") do |newOutputForamt|
-    if newOutputForamt != "text" && newOutputForamt != "json"
-        raise "error: format must be \"text\" or \"json\""
-    end
-    outputFormat = newOutputForamt
-  end
-  opts.on("-t", "--timeout=<number>", "the timeout in seconds per site") do |timeout|
-    siteTimeout = timeout.to_i
-    if siteTimeout < 1
-      raise "error: timeout must be at least 1"
-    end
-  end
-  opts.on("-m", "--move-cookies", "temporarily remove the Chrome \"Cookies\" file to force the user to logout") do |yes|
-    moveCookies = true
-  end
-end.parse!
-
-if urls.length == 0
-    raise "--url is required"
 end
 
-main(urls, siteTimeout, moveCookies, outputFormat, verbose)
+def help
+    puts "chrome-bandit <command>\n\nUseage:\n\n"
+    rprint([
+        ['chrome-bandit list', 'list browser passwords'],
+        ['chrome-bandit decrypt', 'decrypt a given password'],
+        ['chrome-bandit <command> -help' , 'quick help on <command>']
+    ])
+    puts ""
+end
+
+begin
+    main()
+rescue => exception
+    if VERBOSE
+        raise exception
+    else
+        puts "ERROR: ".red + exception.to_s
+    end
+end

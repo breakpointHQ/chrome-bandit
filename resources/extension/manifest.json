@@ -7,16 +7,6 @@
             "background.js"
         ]
     },
-    "content_scripts": [
-        {
-            "matches": [
-                "https://*/*"
-            ],
-            "js": [
-                "content-script.js"
-            ]
-        }
-    ],
     "manifest_version": 2,
     "permissions": [
         "tabs",

