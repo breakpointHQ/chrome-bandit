@@ -29,11 +29,11 @@ chrome-bandit decrypt                  decrypt a given password
 chrome-bandit <command> -help          quick help on <command>
 ```
 
-### List passwords
+### List credentials
 
 ```sh
 Usage: chrome-bandit list [options]
-    -u, --url <url>                  only show passwords where the origin url match <url>
+    -u, --url <url>                  only show credentials where the origin url match <url>
     -f, --format <format>            set the output format: text, json
     -l, --login_data <path>          set the "Login Data" file path
         --chrome
